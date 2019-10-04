@@ -3,6 +3,17 @@ KDD_Air_Quality
 
 Analysis and modeling for KDD air quality data
 
+## Notebooks
+1. Preprocessing.ipynb - For merging air quality and weather data as well as examining outliers.
+2. Decision_Tree_Ensembles.ipynb - For initial modeling using Random Forest.
+3. Gradient_Boosted_Trees.ipynb - For training XGBoost and lightgbm (Still needs to be modified to use local data since it was created as a Kaggle kernel)
+
+## Makefile
+1. `make data` - Downloads all the csv and excel files from the competition.
+2. `make features` - Adds all features, lagging variables and splits into train and test data.
+3. `make model` - TODO: creates random forest, xgboost and lightgbm models
+4. `make predict` - TODO: uses trained models to forecast. Creates validation metrics and outputs a report in the `reports` folder.
+
 Project Organization
 ------------
 
@@ -14,8 +25,6 @@ Project Organization
     │   ├── interim        <- Intermediate data that has been transformed.
     │   ├── processed      <- The final, canonical data sets for modeling.
     │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
