@@ -1,4 +1,4 @@
-.PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3
+.PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3 features
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -47,8 +47,8 @@ data: requirements
 	$(PYTHON_INTERPRETER) src/data/make_weather_stations_list.py data/raw/Beijing data/interim/
 
 
-# features: data
-features:
+## Create features
+features: data
 
 	mkdir -p data/processed/donggaocun/pm25_train_test
 	mkdir -p data/processed/donggaocun/pm10_train_test
