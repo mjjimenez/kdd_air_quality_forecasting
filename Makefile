@@ -28,7 +28,7 @@ requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
 ## Make Dataset
-data: requirements
+data: 
 	#Create data directories
 	mkdir -p data/raw/Beijing
 	mkdir -p data/raw/aq_station_merged
