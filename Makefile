@@ -32,15 +32,16 @@ data:
 	#Create data directories
 	mkdir -p data/raw/Beijing
 	mkdir -p data/raw/aq_station_merged
+	mkdir -p data/interim
 
 	# Download dataset provided by biendata
-	wget -nc 'https://www.dropbox.com/s/mtyg1kitlt5k6h7/Beijing_grid_weather_station.csv?dl=1' -O ./data/Beijing/Beijing_grid_weather_station.csv
-	wget -nc 'https://www.dropbox.com/s/464rp6lhjgu0jv6/beijing_17_18_aq.csv?dl=1' -O ./data/Beijing/beijing_17_18_aq.csv
-	wget -nc 'https://www.dropbox.com/s/lv2i6tictta9pfq/beijing_201802_201803_aq.csv?dl=1' -O ./data/Beijing/beijing_201802_201803_aq.csv
-	wget -nc 'https://www.dropbox.com/s/jjta4addnyjndd8/beijing_17_18_meo.csv?dl=1' -O ./data/Beijing/beijing_17_18_meo.csv
-	wget -nc 'https://www.dropbox.com/s/94llgcr81u2tbg1/Beijing_historical_meo_grid.csv?dl=1' -O ./input/Beijing_historical_meo_grid.csv
-	wget -nc 'https://www.dropbox.com/s/5lhxontpbfoyemi/Beijing_AirQuality_Stations_en.xlsx?dl=0' -O ./data/Beijing/Beijing_AirQuality_Stations_en.xlsx
-	wget -nc 'https://www.dropbox.com/s/nyy2ze7erho05jf/beijing_201802_201803_me.csv?dl=0' -O ./data/Beijing/beijing_201802_201803_me.csv
+	wget -nc 'https://www.dropbox.com/s/mtyg1kitlt5k6h7/Beijing_grid_weather_station.csv?dl=1' -O ./data/raw/Beijing/Beijing_grid_weather_station.csv
+	wget -nc 'https://www.dropbox.com/s/464rp6lhjgu0jv6/beijing_17_18_aq.csv?dl=1' -O ./data/raw/Beijing/beijing_17_18_aq.csv
+	wget -nc 'https://www.dropbox.com/s/lv2i6tictta9pfq/beijing_201802_201803_aq.csv?dl=1' -O ./data/raw/Beijing/beijing_201802_201803_aq.csv
+	wget -nc 'https://www.dropbox.com/s/jjta4addnyjndd8/beijing_17_18_meo.csv?dl=1' -O ./data/raw/Beijing/beijing_17_18_meo.csv
+	wget -nc 'https://www.dropbox.com/s/94llgcr81u2tbg1/Beijing_historical_meo_grid.csv?dl=1' -O ./data/raw/Beijing/Beijing_historical_meo_grid.csv
+	wget -nc 'https://www.dropbox.com/s/5lhxontpbfoyemi/Beijing_AirQuality_Stations_en.xlsx?dl=0' -O ./data/raw/Beijing/Beijing_AirQuality_Stations_en.xlsx
+	wget -nc 'https://www.dropbox.com/s/nyy2ze7erho05jf/beijing_201802_201803_me.csv?dl=0' -O ./data/raw/Beijing/beijing_201802_201803_me.csv
 
 	$(PYTHON_INTERPRETER) src/data/make_beijing_aq_data.py data/raw/Beijing data/interim/
 	$(PYTHON_INTERPRETER) src/data/make_beijing_grid_data.py data/raw/Beijing data/interim/
