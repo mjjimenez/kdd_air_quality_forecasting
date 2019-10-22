@@ -22,6 +22,8 @@ endif
 
 ## Install Python Dependencies
 requirements: test_environment
+	python3 -m venv env
+	bash env/bin/activate
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
