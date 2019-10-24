@@ -17,13 +17,13 @@ def main(input_filepath, output_filepath):
         cleaned data ready to be analyzed (saved in ../processed).
     """ 
 
-    X_train_pm25 = pd.read_feather(f'{input_filepath}/pm25_train_test/X_train_pm25.feather')
-    y_train_pm25 = pd.read_feather(f'{input_filepath}/pm25_train_test/y_train_pm25.feather')
+    X_train_pm25 = pd.read_feather(f'{input_filepath}/pm25_train_test/X_train_pm25.feather').set_index('utc_datetime')
+    y_train_pm25 = pd.read_feather(f'{input_filepath}/pm25_train_test/y_train_pm25.feather').set_index('utc_datetime')
 
     pm25_xg_model = XGBRegressor(n_estimators=500, learning_rate=0.01, max_depth=2)
     pm25_xg_model.fit(X_train_pm25, y_train_pm25)
 
-    pickle.dump(pm25_xg_model, open(f'{output_filepath}/pm25_xgb_model.pickle.dat')
+    pickle.dump(pm25_xg_model, open(f'{output_filepath}/pm25_xgb_model.pickle.dat', 'wb'))
 
 
 if __name__ == '__main__':
