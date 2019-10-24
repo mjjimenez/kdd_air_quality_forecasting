@@ -51,7 +51,7 @@ data:
 
 
 ## Create features
-features: data
+features:
 
 	mkdir -p data/processed/donggaocun/pm25_train_test
 	mkdir -p data/processed/donggaocun/pm10_train_test
@@ -63,6 +63,9 @@ features: data
 	$(PYTHON_INTERPRETER) src/features/process_categoricals.py data/processed data/processed
 	$(PYTHON_INTERPRETER) src/features/timeseries_to_supervised.py data/processed data/processed
 	$(PYTHON_INTERPRETER) src/features/generate_train_test.py data/processed data/processed/donggaocun
+
+train:
+	$(PYTHON_INTERPRETER) src/models/train_model.py data/processed/donggaocun models
 
 
 ## Delete all compiled Python files
