@@ -20,9 +20,12 @@ endif
 # FILES
 #################################################################################
 
-RAW_DATA = data/raw/Beijing/Beijing_grid_weather_station.csv /data/raw/Beijing/beijing_17_18_aq.csv data/raw/Beijing/beijing_201802_201803_aq.csv \
+RAW_DATA = data/raw/Beijing/Beijing_grid_weather_station.csv data/raw/Beijing/beijing_17_18_aq.csv data/raw/Beijing/beijing_201802_201803_aq.csv \
 	  data/raw/Beijing/beijing_17_18_meo.csv data/raw/Beijing/Beijing_historical_meo_grid.csv data/raw/Beijing/Beijing_AirQuality_Stations_en.xlsx \
 	  data/raw/Beijing/beijing_201802_201803_me.csv
+
+INTERIM_DATA = data/interim/beijing_aq_stations.feather data/interim/beijing_aq_union.feather data/interim/Beijing_grid_weather_station.feather \
+	       data/interim/beijing_meo_grid.feather data/interim/beijing_meo_observed_stations.feather data/interim/beijing_meo_observed_union.feather
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -40,7 +43,6 @@ download_data:
 	#Create data directories
 	mkdir -p data/raw/Beijing
 	mkdir -p data/raw/aq_station_merged
-	mkdir -p data/interim
 
 	# Download dataset provided by biendata
 	wget -nc 'https://www.dropbox.com/s/mtyg1kitlt5k6h7/Beijing_grid_weather_station.csv?dl=1' -O ./data/raw/Beijing/Beijing_grid_weather_station.csv
@@ -52,7 +54,9 @@ download_data:
 	wget -nc 'https://www.dropbox.com/s/nyy2ze7erho05jf/beijing_201802_201803_me.csv?dl=0' -O ./data/raw/Beijing/beijing_201802_201803_me.csv
 
 ## Make interim dataset to use for creating features
-data: 
+data: $(RAW_DATA)
+
+	mkdir -p data/interim
 
 	$(PYTHON_INTERPRETER) src/data/make_beijing_aq_data.py data/raw/Beijing data/interim/
 	$(PYTHON_INTERPRETER) src/data/make_beijing_grid_data.py data/raw/Beijing data/interim/
@@ -61,8 +65,9 @@ data:
 	$(PYTHON_INTERPRETER) src/data/make_weather_stations_list.py data/raw/Beijing data/interim/
 
 ## Create features
-features:
+features: $(INTERIM_DATA)
 
+	mkdir -p data/interim/aq_station_merged
 	mkdir -p data/processed/donggaocun/pm25_train_test
 	mkdir -p data/processed/donggaocun/pm10_train_test
 	mkdir -p data/processed/donggaocun/O3_train_test
