@@ -17,6 +17,14 @@ HAS_CONDA=True
 endif
 
 #################################################################################
+# FILES
+#################################################################################
+
+RAW_DATA = data/raw/Beijing/Beijing_grid_weather_station.csv /data/raw/Beijing/beijing_17_18_aq.csv data/raw/Beijing/beijing_201802_201803_aq.csv \
+	  data/raw/Beijing/beijing_17_18_meo.csv data/raw/Beijing/Beijing_historical_meo_grid.csv data/raw/Beijing/Beijing_AirQuality_Stations_en.xlsx \
+	  data/raw/Beijing/beijing_201802_201803_me.csv
+
+#################################################################################
 # COMMANDS                                                                      #
 #################################################################################
 
