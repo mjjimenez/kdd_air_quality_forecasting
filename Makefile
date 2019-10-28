@@ -35,8 +35,8 @@ requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
-## Make Dataset
-data: 
+## Download air quality data from dropbox https://biendata.com/competition/kdd_2018/data/
+download_data: 
 	#Create data directories
 	mkdir -p data/raw/Beijing
 	mkdir -p data/raw/aq_station_merged
@@ -51,12 +51,14 @@ data:
 	wget -nc 'https://www.dropbox.com/s/5lhxontpbfoyemi/Beijing_AirQuality_Stations_en.xlsx?dl=0' -O ./data/raw/Beijing/Beijing_AirQuality_Stations_en.xlsx
 	wget -nc 'https://www.dropbox.com/s/nyy2ze7erho05jf/beijing_201802_201803_me.csv?dl=0' -O ./data/raw/Beijing/beijing_201802_201803_me.csv
 
+## Make interim dataset to use for creating features
+data: 
+
 	$(PYTHON_INTERPRETER) src/data/make_beijing_aq_data.py data/raw/Beijing data/interim/
 	$(PYTHON_INTERPRETER) src/data/make_beijing_grid_data.py data/raw/Beijing data/interim/
 	$(PYTHON_INTERPRETER) src/data/make_beijing_observed_data.py data/raw/Beijing data/interim/
 	$(PYTHON_INTERPRETER) src/data/make_beijing_aq_stations.py data/raw/Beijing data/interim/
 	$(PYTHON_INTERPRETER) src/data/make_weather_stations_list.py data/raw/Beijing data/interim/
-
 
 ## Create features
 features:
