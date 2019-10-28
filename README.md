@@ -11,8 +11,8 @@ Analysis and modeling for KDD air quality data
 ## Makefile
 1. `make data` - Downloads all the csv and excel files from the competition.
 2. `make features` - Adds all features, lagging variables and splits into train and test data.
-3. `make model` - TODO: creates random forest, xgboost and lightgbm models
-4. `make predict` - TODO: uses trained models to forecast. Creates validation metrics and outputs a report in the `reports` folder.
+3. `make model` - Creates random forest, xgboost and lightgbm models
+4. `make predict` - Uses trained models to forecast. Creates validation metrics and outputs a report in the `reports` folder.
 
 Project Organization
 ------------
